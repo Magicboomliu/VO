@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+lint() {
+  source ../devtools/lint_util.sh
+  failed=0
+  bazel_lint //devtools:buildifier || failed=1
+  bazel_lint //devtools:clang-format || failed=1
+  bazel_lint //devtools:google-java-format || failed=1
+  exit $failed
+}
+
+tests() {
+  echo
+}
+
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+(cd $DIR && "$@")
