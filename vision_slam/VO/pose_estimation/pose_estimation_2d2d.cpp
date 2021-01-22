@@ -3,7 +3,6 @@
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
-
 using namespace std;
 using namespace cv;
 
@@ -15,10 +14,17 @@ void find_feature_matches(const Mat &img_1, const Mat &img_2,std::vector<KeyPoin
 void get_pose_from_E(std::vector<KeyPoint> keypoint_01,
 std::vector<KeyPoint>keypoint_02,
 std::vector<DMatch> matches, Mat & R, Mat &t);
+// Functions to Change the pixel points into camera normalization points
 Point2d pixel2cam(const Point2d &p, const Mat &K);
 
-int main(int argc, char*argv[])
-{
+// Functions traingulation Metering
+void traingulationMetering( const vector <KeyPoint> & keypoint01,
+const vector<KeyPoint> & keypoint02, const vector <DMatch> &matches,
+const Mat& R, const Mat &t,vector<Point3d> &points);
+
+
+int main(int argc, char*argv[]){
+  
   // Step one : Find the matches point using    ORB-BRIEF  features
   if (argc != 3) {
     cout << "usage: pose_estimation_2d2d img1 img2" << endl;
@@ -55,9 +61,12 @@ int main(int argc, char*argv[])
     Point2d pt2 = pixel2cam(keypoints_2[m.trainIdx].pt, K);
     Mat y2 = (Mat_<double>(3, 1) << pt2.x, pt2.y, 1);
     Mat d = y2.t() * t_x * R * y1;
-    cout << "epipolar constraint (should be zero) =  " << d << endl;
+    // cout << "epipolar constraint (should be zero) =  " << d << endl;
      }
-return 0;
+     //-- 三角化
+  vector<Point3d> points3d;
+  traingulationMetering(keypoints_1, keypoints_2, matches, R, t, points3d);
+   return 0;
 }
 
 void find_feature_matches(const Mat &img_1, const Mat &img_2,
@@ -146,4 +155,43 @@ Point2d pixel2cam(const Point2d &p, const Mat &K) {
       (p.x - K.at<double>(0, 2)) / K.at<double>(0, 0),
       (p.y - K.at<double>(1, 2)) / K.at<double>(1, 1)
     );
+}
+
+
+void traingulationMetering( const vector <KeyPoint> & keypoint01,
+const vector<KeyPoint> & keypoint02, const vector <DMatch> &matches,
+const Mat& R, const Mat &t,vector<Point3d> &points){
+ Mat T1 = (Mat_<float>(3, 4) <<
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0);
+  Mat T2 = (Mat_<float>(3, 4) <<
+    R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), t.at<double>(0, 0),
+    R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), t.at<double>(1, 0),
+    R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), t.at<double>(2, 0)
+  );
+
+  Mat K = (Mat_<double>(3, 3) << 520.9, 0, 325.1, 0, 521.0, 249.7, 0, 0, 1);
+  vector<Point2f> pts_1, pts_2;
+  for (DMatch m:matches) {
+    // 将像素坐标转换至相机坐标
+    pts_1.push_back(pixel2cam(keypoint01[m.queryIdx].pt, K));
+    pts_2.push_back(pixel2cam(keypoint02[m.trainIdx].pt, K));  // keypoints 's training idx is corresponding to the training of cam 1
+  }
+
+  Mat pts_4d;
+  cv::triangulatePoints(T1, T2, pts_1, pts_2, pts_4d);
+
+  // 转换成非齐次坐标
+  for (int i = 0; i < pts_4d.cols; i++) {
+    Mat x = pts_4d.col(i);
+    x /= x.at<float>(3, 0); // 归一化
+    Point3d p(
+      x.at<float>(0, 0),
+      x.at<float>(1, 0),
+      x.at<float>(2, 0)
+    );
+    points.push_back(p);
+  }
+
 }
