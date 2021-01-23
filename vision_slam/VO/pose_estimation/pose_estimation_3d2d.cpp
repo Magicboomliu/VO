@@ -18,6 +18,9 @@
 #include <chrono>
 using namespace std;
 using namespace cv;
+// define VecVec2d and VecVec3d
+typedef vector<Eigen::Vector2d, Eigen::aligned_allocator<Eigen::Vector2d>> VecVector2d;
+typedef vector<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d>> VecVector3d;
 
 // Functions Get the matching points
 void find_feature_matches(const Mat &img_1, const Mat &img_2,std::vector<KeyPoint> &keypoints_1,
@@ -26,6 +29,13 @@ void find_feature_matches(const Mat &img_1, const Mat &img_2,std::vector<KeyPoin
 // Functions to Change the pixel points into camera normalization points
 Point2d pixel2cam(const Point2d &p, const Mat &K);
 
+// Bundle Adjustment  By Gauss-Newton
+void bundleAdjustmentGaussNewton(
+  const VecVector3d &points_3d, 
+  const VecVector2d &points_2d,
+  const Mat &K,     
+  Sophus::SE3d &pose    // need to be optimazied
+);
 
 int main(int argc, char const *argv[]){
     if(argc!=5){
@@ -62,16 +72,12 @@ pts_2d.push_back(keypoints_2[m.trainIdx].pt);      // keypoint2 :only 2d
 }
 
 // Solve PNP using OpenCV
-
 Mat r, t;  // r is rotation vector , t is translation vector
 solvePnP(pts_3d,pts_2d,camera_K,Mat(),r,t, false, cv::SOLVEPNP_EPNP);
 Mat R;
 cv::Rodrigues(r,R);
-
 cout<<" Rotation Matrix R (3,3 ): "<<"\n"<<R<<endl;
 cout<<"  translation vector  (3,1): "<<"\n"<<t<<endl;
-
-
 return 0;
 }
 
@@ -125,4 +131,25 @@ Point2d pixel2cam(const Point2d &p, const Mat &K) {
       (p.x - K.at<double>(0, 2)) / K.at<double>(0, 0),
       (p.y - K.at<double>(1, 2)) / K.at<double>(1, 1)
     );
+}
+
+
+void bundleAdjustmentGaussNewton{
+ typedef Eigen::Matrix<double, 6, 1> Vector6d;
+  const int iterations = 10;
+  double cost = 0, lastCost = 0;
+  /// camera model//
+  // X' = f(X/Z) Y'= f(Y/Z)
+  // u = aX' +cx   v= bY' + cy
+  
+  // Camera inner parameter
+  //         [ fx, 0 , cx ]
+ //  K =  [ 0, fx,  cy ]
+ //          [ 0,  0,   1  ]
+  double fx = K.at<double>(0, 0); 
+  double fy = K.at<double>(1, 1);
+  double cx = K.at<double>(0, 2);
+  double cy = K.at<double>(1, 2);
+
+
 }
