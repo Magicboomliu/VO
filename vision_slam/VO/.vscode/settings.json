@@ -54,6 +54,13 @@
         "thread": "cpp",
         "cfenv": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "csignal": "cpp",
+        "condition_variable": "cpp",
+        "unordered_set": "cpp",
+        "random": "cpp",
+        "set": "cpp",
+        "mutex": "cpp",
+        "typeindex": "cpp"
     }
 }

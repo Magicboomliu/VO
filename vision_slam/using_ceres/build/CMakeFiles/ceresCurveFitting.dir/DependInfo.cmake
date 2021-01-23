@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/liuzihua/桌面/zihua/ComputerVision/vision_slam/using_ceres/using_ceres.cc" "/home/liuzihua/桌面/zihua/ComputerVision/vision_slam/using_ceres/build/CMakeFiles/ceresCurveFitting.dir/using_ceres.cc.o"
+  "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/using_ceres/using_ceres.cc" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/using_ceres/build/CMakeFiles/ceresCurveFitting.dir/using_ceres.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

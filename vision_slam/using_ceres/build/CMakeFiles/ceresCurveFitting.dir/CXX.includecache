@@ -14,7 +14,7 @@ opencv2/core/cuda.hpp
 opencv2/features2d.hpp
 /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/opencv2/features2d.hpp
 
-/home/liuzihua/桌面/zihua/ComputerVision/vision_slam/using_ceres/using_ceres.cc
+/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/using_ceres/using_ceres.cc
 iostream
 -
 opencv2/core/core.hpp

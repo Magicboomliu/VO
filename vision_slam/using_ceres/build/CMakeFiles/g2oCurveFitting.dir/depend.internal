@@ -4,7 +4,7 @@
 CMakeFiles/g2oCurveFitting.dir/g2oCurveFitting.cpp.o
  /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp
  /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp
- /home/liuzihua/桌面/zihua/ComputerVision/vision_slam/using_ceres/g2oCurveFitting.cpp
+ /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/using_ceres/g2oCurveFitting.cpp
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
  /usr/include/eigen3/Eigen/Dense
