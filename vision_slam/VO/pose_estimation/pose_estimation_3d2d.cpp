@@ -135,7 +135,7 @@ Point2d pixel2cam(const Point2d &p, const Mat &K) {
 
 
 void bundleAdjustmentGaussNewton{
- typedef Eigen::Matrix<double, 6, 1> Vector6d;
+ typedef Eigen::Matrix<double, 6, 1> Vector6d;   // because Se(3) is a 6 dim vector, First 3 P is translation, Second 3 Fi is rotatiom
   const int iterations = 10;
   double cost = 0, lastCost = 0;
   /// camera model//
@@ -151,5 +151,42 @@ void bundleAdjustmentGaussNewton{
   double cx = K.at<double>(0, 2);
   double cy = K.at<double>(1, 2);
 
+for (int iter = 0; iter < iterations; iter++) {
+
+  // Parameter needed to be optimized: JTJ is H:
+  //   H * delta(x) = g : Gauss Newton equation
+  //   g is the -J(x)Tf(x)
+    Eigen::Matrix<double, 6, 6> H = Eigen::Matrix<double, 6, 6>::Zero();
+    Vector6d b = Vector6d::Zero();  //  b   represent the SE(3)
+
+       cost = 0;
+    // compute cost of all 3d points
+    for (int i = 0; i < points_3d.size(); i++) {
+      Eigen::Vector3d pc = pose * points_3d[i];  // First Compute the  Camera pose coordinate
+      double inv_z = 1.0 / pc[2];  // Get the Last Dim which means the 1/Z
+      double inv_z2 = inv_z * inv_z;  
+      Eigen::Vector2d proj(fx * pc[0] / pc[2] + cx, fy * pc[1] / pc[2] + cy);  // project 3d into 2 d, By mutiply the Camera matrix
+
+      Eigen::Vector2d e = points_2d[i] - proj;  // Compute the reprojection Loss
+
+      cost += e.squaredNorm();   // Accumulate the loss of each point
+      Eigen::Matrix<double, 2, 6> J;    // Get the Jacobian matrix of the Re projection loss
+      J << -fx * inv_z,
+        0,
+        fx * pc[0] * inv_z2,
+        fx * pc[0] * pc[1] * inv_z2,
+        -fx - fx * pc[0] * pc[0] * inv_z2,
+        fx * pc[1] * inv_z,
+        0,
+        -fy * inv_z,
+        fy * pc[1] * inv_z2,
+        fy + fy * pc[1] * pc[1] * inv_z2,
+        -fy * pc[0] * pc[1] * inv_z2,
+        -fy * pc[0] * inv_z;
+
+      H += J.transpose() * J;
+      b += -J.transpose() * e;
+    }
+}
 
 }
