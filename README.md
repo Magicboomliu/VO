@@ -1,5 +1,7 @@
 # VO
-Principile Algorithm of Visual Odometry of Computer Vision   
+Principile Algorithm of Visual Odometry of Computer Vision   ( Make sure You underStand LaTex )    
+If you cannot install chrome LaTex support, Please via:  
+https://blog.csdn.net/magicboom/article/details/113186548
 ## Some basic mathematical concepts  一些基本的数学概念   
 ### **Camera Model 相机模型**  
 假设P 的真实世界坐标为 $[X,Y,Z]{^T}$, 相机的成像坐标为 $[X',Y',Z']{^T}$, 焦距为 $f$ ,二者满足以下的关系:  
