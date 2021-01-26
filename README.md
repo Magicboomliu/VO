@@ -1,5 +1,8 @@
 # Visual Odometry of Computer Vision 视觉里程计设计中的数学部分
 Principile Algorithm of Visual Odometry of Computer Vision   ( Make sure You underStand LaTex )  
+Chrome Latex Extention is required, If Not, Please via:  
+https://blog.csdn.net/magicboom/article/details/113186548  
+
 ****Github Repo: https://github.com/Magicboomliu/VO****  
 ## Some basic mathematical concepts  一些基本的数学概念   
 ### **1.Camera Model 相机模型**  
