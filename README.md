@@ -79,4 +79,39 @@ $a_{ram}=\begin{bmatrix}
      -a_2,&a1,&0\\
 \end{bmatrix}$      
 
-**VO的基本思路之一： 根据匹配特征点算E,F, 根据E,F用SVD或是Bundle Adjustment算R,t.**
+**VO的基本思路之一： 根据匹配特征点算E,F, 根据E,F用SVD或是Bundle Adjustment算R,t.**   
+
+## 3 Lie algebra 李代数  
+  李代数的存在是方便对旋转矩阵求微分， 从而达到优化的效果。因为旋转矩阵本身不满足“群”的性质： 比如 一个旋转矩阵$R_1$加上另外一个旋转矩阵$R_2$不能保证为旋转矩阵，因此很难进行微分运算， 因此我们把旋转矩阵映射到一个特殊的群上，使其能够满足进行微分运算的性质，这个群就是 “李群”。**李代数对应李群的正切空间，它描述了李群局部的导数。**   
+
+  矩阵是可以微分的， 矩阵对时间$t$的微分为一个反对称(也叫斜对称)矩阵左乘它本身,**对于某个时刻的R(t)（李群空间），存在一个三维向量φ=（φ1，φ2，φ3）（李代数空间），用来描述R在t时刻的局部的导数**：  
+  ![](https://pic2.zhimg.com/v2-79c3071d633bfaddad1eba24195dce5d_r.jpg)    
+  SO(3)上的原点 φ0 附近的正切空间上。这个φ正是李群大SO(3)对应的李代数小so(3),  即在原点附近，满足以下关系:   
+  ![](https://pic3.zhimg.com/v2-2f7d78554ab00257cd58d58813ac96a2_r.jpg)  
+  ### 李代数小so(3)是三维向量φ的集合，每个向量φi的反对称矩阵都可以表达李群(大SO(3))上旋转矩阵R的导数，而R和φ是一个指数映射关系。
+  然后可以使使用Taylor公式对$R(t)$进行计算：  
+  ![](https://pic1.zhimg.com/v2-8d19586b2e76bafed915af5c63c53c64_r.jpg)  
+  ![](https://pic4.zhimg.com/v2-cc3027edb121b531208920c9bc4f29fb_r.jpg)   
+##  由此可以看出， so(3)本质上由旋转向量组成的的空间，这样我们可以说旋转矩阵的导数可以由其对应的旋转向量指定，指导如何在旋转矩阵中进行微积分运算。
+
+## SO(3) SE(3)和 so(3) se(3)的转换关系： 
+![](https://pic1.zhimg.com/v2-e71634605ff59e642585155d7e8be4ac_r.jpg)  
+
+## 矩阵优化的思路：  
+1. 李代数表示Pose,使用李代数加法求导。（李代数求导模型）  
+2.  使用李代数左乘，右乘微小扰动，对该扰动求导。（扰动模型）  
+
+p为空间内部一点，R为Pose，我们对R求导。  
+
+ （1）用李代数表示姿态，然后根据李代数加法来对李代数求导。即传统求导的思路，把增量直接定义在李代数上。  
+![](https://img-blog.csdnimg.cn/20200720113407214.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNTE4OTU2,size_16,color_FFFFFF,t_70)   
+(2) 对李群SO（3）左乘或者右乘微小扰动，然后对该扰动求导，称为左扰动和右扰动模型。即把增量扰动直接添加在李群上，然后使用李代数表示此扰动。  
+![](https://img-blog.csdnimg.cn/20200720141933395.png)   
+
+（3）SE(3)上面,含义是：考虑一个空间点P（需要是齐次坐标，否则维数不对），受到刚体变换T，得到TP：  
+![](https://img-blog.csdnimg.cn/20200720143146117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyNTE4OTU2,size_16,color_FFFFFF,t_70)   
+上面最后一行矩阵除法，与矩阵乘法规则类似，只是乘号变成了除号。其使用一个4×1矩阵除以一个1×6矩阵得到一个4×6矩阵
+
+### 引入李群李代数的意义：第一个是因为在欧式变换矩阵上不好定义导数，引入李群李代数使得导数定义变得自然合理；第二个是本来旋转矩阵与欧式变换矩阵具有本身的约束，使得将它们作为优化变量会引入额外约束，通过李群李代数可以使得问题变成一个无约束的优化问题.  
+![](https://pic2.zhimg.com/v2-1097d5db89bedbd60b55ce5a23daef75_r.jpg)
+
