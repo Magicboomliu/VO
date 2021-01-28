@@ -311,3 +311,26 @@ Mat r, t;
 cout<<"T="<<endl<<pose_gn.matirx()<<endl;
 }
 ````
+## Levenberg-Marquardt（列文伯格-马夸尔特）算法  
+LM方法在一定程度上修正了这些问题，一般认为它比GN更为鲁棒。尽管它的收敛速度可能比GN慢，被称之为阻尼牛顿法.由于GN中采用近似的二阶泰勒展开只能在展开点附近有较好的近似效果，所以我们很自然的想到应该给 $\Delta x$ 添加一个信赖区域(Trust Region)，不能让它太大使得近似不准确。非线性优化有一系列这类方法，这类方法也被称之为信赖区域方法(Trust Region Method)。在信赖区域里面，我们认为近似是有效的，出了这个区域，近似可能会出问题。  
+
+那么如何确认这个信赖区域的范围？一个比较好的方法是根据我们的近似模型跟实际函数之间的差异来确定。如果差异够小，我们让范围尽可能大。如果差异大，我们就缩小这个近似范围。因此，可以考虑使用  
+![](https://pic2.zhimg.com/v2-f33a3328543fe8ccf7e40c2285e5caf9_r.jpg)  
+
+来判断泰勒近似是否够好， 分子式实际函数下降的值，分母是近似模型下降的值。如果接近于1，则近似是好的。如果太小，说明实际减小的值远少于近似减少的值，这认为近似比较差。反之，如果 比较大，则说明实际下降的比预计的更大，我们可以放大近似范围.  
+![](https://pic4.zhimg.com/v2-2703641996ec13c54634685c0f0a098b_r.jpg)  
+相当于一个带约束的最小2乘法：  
+![](https://pic1.zhimg.com/v2-edf5b37357089cf566dcec6e236e38d4_r.jpg)   
+最后可以得到增量方程：  
+![](https://pic2.zhimg.com/80/v2-b9b62d1d435ba0c3b15aff771e7bf951_720w.png)
+  
+  记录$D^TD = I$， 简化增量方程：   
+
+  ![](https://pic2.zhimg.com/80/v2-b9b62d1d435ba0c3b15aff771e7bf951_720w.png)
+
+我们看到，当参数 $\lambda$ 比较小时， $H$ 占主要地位，这说明二次近似模型在该范围内是比较好的，LM方法更接近于GN法。另一方面，当   $\lambda$比较大时，  $\lambda I$占主要地位，LM更接近于一阶梯度下降法，这说明附近二次近似不够好。LM的求解方法可以一定程度避免线性方程组的系数矩阵非奇异和病态问题，提供更稳定更准确的增量 $\Delta x$。 
+![](https://img-blog.csdn.net/20141118163736639?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDkyMjE4Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)  
+### 伪代码逻辑：  
+
+![](https://img-blog.csdn.net/20141118194900802?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDkyMjE4Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+
