@@ -22,3 +22,7 @@ target_link_libraries(pose_estimation_2d2d ${OpenCV_LIBS})
 
 add_executable(pose_estimation_3d2d pose_estimation_3d2d.cpp)
 target_link_libraries(pose_estimation_3d2d ${G2O_CORE_LIBRARY} ${G2O_STUFF_LIBRARY} ${OpenCV_LIBS})
+
+add_executable(pose_estimation_3d3d pose_estimation_3d3d.cpp)
+target_link_libraries(pose_estimation_3d3d
+${G2O_CORE_LIBRARY} ${G2O_STUFF_LIBRARY} ${OpenCV_LIBS})
