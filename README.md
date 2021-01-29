@@ -334,3 +334,27 @@ LM方法在一定程度上修正了这些问题，一般认为它比GN更为鲁�
 
 ![](https://img-blog.csdn.net/20141118194900802?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMDkyMjE4Ng==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
+### 补充： 如何使用 G2O进行图优化  
+SLAM领域，基于图优化的一个用的非常广泛的库就是g2o，它是General Graphic Optimization 的简称，是一个用来优化非线性误差函数的c++框架。  
+
+G2O的基本框架如下：
+![](https://mmbiz.qpic.cn/mmbiz_png/rqpicxXx8cNnCWhMdT21BM0fE87O2BzHgBrrngMrECf7iccFw8fNmVOM4FVYJ5uiaCwJRrkY7oz9l4IBok36NaBicg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)   
+
+G2O 本身的核心是一个稀疏矩阵的优化器。即图中的**SparseOptimizer**, 由图可知， 它一个优化图**OptimizableGraph**，也是一个超图**HyperGraph**， 这个超图包含了许多顶点（**HyperGraph::Vertex**）和边（**HyperGraph::Edge**）。而这些顶点顶点继承自 **Base Vertex**，也就是**OptimizableGraph::Vertex**，而边可以继承自 **BaseUnaryEdge**（单边）, **BaseBinaryEdge**（双边）或**BaseMultiEdge**（多边），它们都叫做**OptimizableGraph::Edge**。   
+在G2O中，顶点 Vertex 代表优化的对象，比如相机Pose(R,t)， 而边  Edge 表示误差，即用来优化 Vertex 的量（如重投影误差)。  
+  
+  整个图的核心SparseOptimizer 包含一个优化算法（OptimizationAlgorithm）的对象。OptimizationAlgorithm是通过 OptimizationWithHessian 来实现的。其中迭代策略可以从Gauss-Newton（高斯牛顿法，简称GN）, Levernberg-Marquardt（简称LM法）, Powell's dogleg 三者中间选择一个（我们常用的是GN和LM）  
+
+  OptimizationWithHessian 内部包含一个求解器（Solver），这个Solver实际是由一个BlockSolver组成的。这个BlockSolver有两个部分，一个是SparseBlockMatrix ，用于计算稀疏的雅可比和Hessian矩阵；一个是线性方程的求解器（LinearSolver），它用于计算迭代过程中最关键的一步HΔx=−b，LinearSolver有几种方法可以选择：PCG, CSparse, Choldmod。
+
+  但是在写代码时候， 我们需要从定义BlockSovler,LinearSolver开始写起： 写G2O代码的逻辑步骤如下：  
+  * 创建一个线性求解器LinearSolver。（解增量方程H△X=-b，可以制定解法） 
+  * 创建BlockSolver。并用上面定义的线性求解器初始化
+  * 创建总求解器solver。并从GN, LM, DogLeg 中选一个，再用上述块求解器BlockSolver初始化
+  * 创建终极大boss 稀疏优化器（SparseOptimizer），并用已定义求解器作为求解方法。
+  * 定义图的顶点和边。并添加到SparseOptimizer中。
+  * 设置优化参数，开始执行优化。
+  具体每一个部分参考 《一起动手SLAM》的文章, 介绍很详细：  
+ [G2O框架介绍](https://mp.weixin.qq.com/s?__biz=MzIxOTczOTM4NA==&mid=2247486858&idx=1&sn=ce458d5eb6b1ad11b065d71899e31a04&chksm=97d7e81da0a0610b1e3e12415b6de1501329920c3074ab5b48e759edbb33d264a73f1a9f9faf&scene=21#wechat_redirect)     
+ [G2O Vertex的定义方法](https://mp.weixin.qq.com/s?__biz=MzIxOTczOTM4NA==&mid=2247486992&idx=1&sn=ecb7c3ef9bd968e51914c2f5b767428d&chksm=97d7eb87a0a062912a9db9fb16a08129f373791fd3918952342d5db46c0bc4880326a7933671&scene=21#wechat_redirect)  
+ [G2O Edge的定义方法](https://zhuanlan.zhihu.com/p/58521241)

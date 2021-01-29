@@ -37,6 +37,14 @@ void bundleAdjustmentGaussNewton(
   Sophus::SE3d &pose    // need to be optimazied
 );
 
+// Bundle Adjustment By G2O
+void bundleAdjustmentG2O(
+  const VecVector3d &points_3d,  
+  const VecVector2d &points_2d,
+  const Mat &K,
+  Sophus::SE3d &pose
+);
+
 int main(int argc, char const *argv[]){
     if(argc!=5){
         cout<<"Usage (bash): pose_estimation3d2d.cpp  <image01> <image02> <rgbd-image01-path>  <rgbd-image02-path> "<<endl;
@@ -67,7 +75,7 @@ ushort d = rgbd_image01.ptr<unsigned short>(int(keypoints_1[m.queryIdx].pt.y))[i
 if(d==0) continue;   
 float normalized_d = d /1000.0;
 Point2d p1 = pixel2cam(keypoints_1[m.queryIdx].pt,camera_K);
-pts_3d.push_back(Point3f(p1.x*normalized_d,p1.y*normalized_d,normalized_d));  // keypint one's 3d 
+pts_3d.push_back(Point3f(p1.x*normalized_d,p1.y*normalized_d,normalized_d));  // keypint one's 3d , 相机坐标
 pts_2d.push_back(keypoints_2[m.trainIdx].pt);      // keypoint2 :only 2d
 }
 
@@ -90,7 +98,9 @@ cout<<"  translation vector  (3,1): "<<"\n"<<t<<endl;
   cout << "Calling bundle adjustment by gauss newton" << endl;
   Sophus::SE3d pose_gn;
   bundleAdjustmentGaussNewton(pts_3d_eigen, pts_2d_eigen, camera_K, pose_gn);
-
+ 
+ Sophus::SE3d pose_g2o;
+bundleAdjustmentG2O(pts_3d_eigen, pts_2d_eigen, camera_K, pose_g2o);
 return 0;
 }
 
@@ -224,6 +234,121 @@ void bundleAdjustmentGaussNewton(
       break;
     }
   }
-
   cout << "pose by g-n: \n" << pose.matrix() << endl;
+
+}
+
+// 定义 Vertex 和  Edge
+
+class VertexPose : public g2o::BaseVertex<6, Sophus::SE3d>{
+public:
+  EIGEN_MAKE_ALIGNED_OPERATOR_NEW; // Eigen 内部处理动态分配变量的对齐问题
+    // setToOriginImpl()用来重置优化变量， 这里初始化一个空 的 SE3
+    // 这里使用虚函数的原因是由C++11新特性，重写了父类的虚函数
+    virtual void setToOriginImpl() override {
+    _estimate = Sophus::SE3d(); 
+  }
+   /// left multiplication on SE3， setToOriginImpl()用来Upfate优化变量,这里使用左乘来更新
+  virtual void oplusImpl(const double *update) override {
+    Eigen::Matrix<double, 6, 1> update_eigen;
+    update_eigen << update[0], update[1], update[2], update[3], update[4], update[5];
+    _estimate = Sophus::SE3d::exp(update_eigen) * _estimate;
+  }
+    virtual bool read(istream &in) override {}
+
+  virtual bool write(ostream &out) const override {}
+};
+
+/// 定义边， 也就是重新投影误差， 我们知道重投影误差为2位， 类型是vector2d, 优化对象的类型是一个VertexPose
+class EdgeProjection : public g2o::BaseUnaryEdge<2, Eigen::Vector2d, VertexPose> {
+public:
+  EIGEN_MAKE_ALIGNED_OPERATOR_NEW;
+ // 构造函数
+  EdgeProjection(const Eigen::Vector3d &pos, const Eigen::Matrix3d &K) : _pos3d(pos), _K(K) {}
+// 计算重新投影误差
+  virtual void computeError() override {
+    const VertexPose *v = static_cast<VertexPose *> (_vertices[0]);
+    Sophus::SE3d T = v->estimate();  // 获得顶点的观测value
+    Eigen::Vector3d pos_pixel = _K * (T * _pos3d); // // K TP = s[u,v]
+    pos_pixel /= pos_pixel[2]; // 齐次到非齐次
+    _error = _measurement - pos_pixel.head<2>(); //_measurement：存储观测值
+  }
+   // 更新操作, 定义Jaco矩阵即可，这里使用就是G-N法
+  virtual void linearizeOplus() override {
+    const VertexPose *v = static_cast<VertexPose *> (_vertices[0]);
+    Sophus::SE3d T = v->estimate();
+    Eigen::Vector3d pos_cam = T * _pos3d;  
+    double fx = _K(0, 0);
+    double fy = _K(1, 1);
+    double cx = _K(0, 2);
+    double cy = _K(1, 2);
+    double X = pos_cam[0];
+    double Y = pos_cam[1];
+    double Z = pos_cam[2];
+    double Z2 = Z * Z;
+    _jacobianOplusXi
+      << -fx / Z, 0, fx * X / Z2, fx * X * Y / Z2, -fx - fx * X * X / Z2, fx * Y / Z,
+      0, -fy / Z, fy * Y / (Z * Z), fy + fy * Y * Y / Z2, -fy * X * Y / Z2, -fy * X / Z;
+  };
+
+  virtual bool read(istream &in) override {}
+
+  virtual bool write(ostream &out) const override {}
+
+private:
+  Eigen::Vector3d _pos3d;
+  Eigen::Matrix3d _K;
+};
+
+void bundleAdjustmentG2O(
+  const VecVector3d &points_3d,  
+  const VecVector2d &points_2d,
+  const Mat &K,
+  Sophus::SE3d &pose
+){
+  // 构建图优化，先设定g2o
+  // pose is 6 ， 3 for rotation, 3 for translation. landmark is 3 : X,Y,Z,观测点的维度
+  typedef g2o::BlockSolver<g2o::BlockSolverTraits<6, 3>> BlockSolverType;  // pose is 6, landmark is 3
+  typedef g2o::LinearSolverDense<BlockSolverType::PoseMatrixType> LinearSolverType; // 线性求解器, 去优化Pose Matrix
+    // 梯度下降方法，可以从GN, LM, DogLeg 中选， 接受一个BlockSolverType,用Linear
+  auto solver = new g2o::OptimizationAlgorithmGaussNewton(
+    g2o::make_unique<BlockSolverType>(g2o::make_unique<LinearSolverType>()));
+
+    g2o::SparseOptimizer optimizer;     // 图模型
+  optimizer.setAlgorithm(solver);   // 设置求解器
+  optimizer.setVerbose(true);       // 打开调试输出
+
+  // 下面开始往图里面添加 Vertex 和 Edge
+  // vertex， 只有一个R,t
+  VertexPose *vertex_pose = new VertexPose(); // camera vertex_pose
+  vertex_pose->setId(0);
+  vertex_pose->setEstimate(Sophus::SE3d());
+  optimizer.addVertex(vertex_pose);
+
+    // K
+  Eigen::Matrix3d K_eigen;
+  K_eigen <<
+          K.at<double>(0, 0), K.at<double>(0, 1), K.at<double>(0, 2),
+    K.at<double>(1, 0), K.at<double>(1, 1), K.at<double>(1, 2),
+    K.at<double>(2, 0), K.at<double>(2, 1), K.at<double>(2, 2);
+
+  // edges
+  int index = 1;
+  for (size_t i = 0; i < points_2d.size(); ++i) {
+    auto p2d = points_2d[i];
+    auto p3d = points_3d[i];
+    EdgeProjection *edge = new EdgeProjection(p3d, K_eigen);
+    edge->setId(index);
+    edge->setVertex(0, vertex_pose); // 对应成员函数_vertex
+    edge->setMeasurement(p2d); // 对应成员函数_mesurement
+    edge->setInformation(Eigen::Matrix2d::Identity()); // 图中的Q就是信息矩阵，为了表示我们对误差各分量重视程度的不一样。
+    // 一般情况下，我们都设置这个矩阵为单位矩阵，表示我们对所有的误差分量的重视程度都一样。
+    optimizer.addEdge(edge);
+    index++;
+  }
+  optimizer.setVerbose(true);
+  optimizer.initializeOptimization();
+  optimizer.optimize(10);
+  cout << "pose estimated by g2o =\n" << vertex_pose->estimate().matrix() << endl;
+  pose = vertex_pose->estimate();
 }
