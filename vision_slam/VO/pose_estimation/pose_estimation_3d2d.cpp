@@ -325,7 +325,7 @@ void bundleAdjustmentG2O(
   vertex_pose->setEstimate(Sophus::SE3d());
   optimizer.addVertex(vertex_pose);
 
-    // K
+    //  Camera K
   Eigen::Matrix3d K_eigen;
   K_eigen <<
           K.at<double>(0, 0), K.at<double>(0, 1), K.at<double>(0, 2),
