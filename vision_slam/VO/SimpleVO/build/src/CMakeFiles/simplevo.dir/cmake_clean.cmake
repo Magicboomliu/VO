@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/simplevo.dir/camera.cpp.o"
+  "CMakeFiles/simplevo.dir/frame.cpp.o"
   "../../lib/libsimplevo.pdb"
   "../../lib/libsimplevo.so"
 )

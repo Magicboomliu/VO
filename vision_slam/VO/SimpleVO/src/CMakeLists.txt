@@ -1,5 +1,6 @@
 add_library( simplevo SHARED
     camera.cpp
+    frame.cpp
 )
 
 target_link_libraries( simplevo

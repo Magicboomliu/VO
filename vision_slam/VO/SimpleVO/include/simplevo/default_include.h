@@ -1,4 +1,4 @@
-s#ifndef DEFAULT_INCLUDE_H
+#ifndef DEFAULT_INCLUDE_H
 #define DEFAULT_INCLUDE_H
 
 // define the commonly included file to avoid a long include list
