@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/optical_flow.cpp" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/CMakeFiles/optical_flow.dir/optical_flow.cpp.o"
+  "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/optical_flow.cpp" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/CMakeFiles/optical_flow.dir/optical_flow.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -12,6 +12,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/local/include"
   "/usr/local/include/opencv"
+  "/usr/include/eigen3"
   )
 
 # Targets to which this target links.

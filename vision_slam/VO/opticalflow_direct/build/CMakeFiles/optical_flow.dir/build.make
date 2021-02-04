@@ -58,17 +58,17 @@ include CMakeFiles/optical_flow.dir/progress.make
 include CMakeFiles/optical_flow.dir/flags.make
 
 CMakeFiles/optical_flow.dir/optical_flow.cpp.o: CMakeFiles/optical_flow.dir/flags.make
-CMakeFiles/optical_flow.dir/optical_flow.cpp.o: ../optical_flow.cpp
+CMakeFiles/optical_flow.dir/optical_flow.cpp.o: optical_flow.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/optical_flow.dir/optical_flow.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/optical_flow.dir/optical_flow.cpp.o -c /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/optical_flow.cpp
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/optical_flow.dir/optical_flow.cpp.o -c /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/optical_flow.cpp
 
 CMakeFiles/optical_flow.dir/optical_flow.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/optical_flow.dir/optical_flow.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/optical_flow.cpp > CMakeFiles/optical_flow.dir/optical_flow.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/optical_flow.cpp > CMakeFiles/optical_flow.dir/optical_flow.cpp.i
 
 CMakeFiles/optical_flow.dir/optical_flow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optical_flow.dir/optical_flow.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/optical_flow.cpp -o CMakeFiles/optical_flow.dir/optical_flow.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/optical_flow.cpp -o CMakeFiles/optical_flow.dir/optical_flow.cpp.s
 
 CMakeFiles/optical_flow.dir/optical_flow.cpp.o.requires:
 

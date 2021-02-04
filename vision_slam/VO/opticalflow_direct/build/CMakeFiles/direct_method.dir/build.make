@@ -90,6 +90,8 @@ direct_method_EXTERNAL_OBJECTS =
 
 direct_method: CMakeFiles/direct_method.dir/direct_method.cpp.o
 direct_method: CMakeFiles/direct_method.dir/build.make
+direct_method: /usr/local/lib/libg2o_core.so
+direct_method: /usr/local/lib/libg2o_stuff.so
 direct_method: /usr/local/lib/libopencv_stitching.so.3.4.0
 direct_method: /usr/local/lib/libopencv_superres.so.3.4.0
 direct_method: /usr/local/lib/libopencv_videostab.so.3.4.0

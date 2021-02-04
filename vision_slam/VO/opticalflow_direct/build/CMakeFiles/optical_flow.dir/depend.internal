@@ -4,7 +4,7 @@
 CMakeFiles/optical_flow.dir/optical_flow.cpp.o
  /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp
  /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp
- /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/optical_flow.cpp
+ /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/optical_flow.cpp
  /usr/local/include/opencv/cxcore.h
  /usr/local/include/opencv2/calib3d.hpp
  /usr/local/include/opencv2/calib3d/calib3d_c.h

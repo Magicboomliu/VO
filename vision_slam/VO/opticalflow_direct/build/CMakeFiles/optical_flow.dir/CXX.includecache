@@ -14,7 +14,7 @@ opencv2/core/cuda.hpp
 opencv2/features2d.hpp
 /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/opencv2/features2d.hpp
 
-/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/optical_flow.cpp
+/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/opticalflow_direct/build/optical_flow.cpp
 iostream
 -
 fstream
