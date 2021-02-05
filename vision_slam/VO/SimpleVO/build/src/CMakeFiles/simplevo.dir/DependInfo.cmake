@@ -5,7 +5,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/camera.cpp" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/simplevo.dir/camera.cpp.o"
+  "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/config.cpp" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/simplevo.dir/config.cpp.o"
   "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/frame.cpp" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/simplevo.dir/frame.cpp.o"
+  "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/map.cpp" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/simplevo.dir/map.cpp.o"
+  "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/mappoint.cpp" "/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/simplevo.dir/mappoint.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

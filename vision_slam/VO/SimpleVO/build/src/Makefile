@@ -152,6 +152,33 @@ camera.cpp.s:
 	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/camera.cpp.s
 .PHONY : camera.cpp.s
 
+config.o: config.cpp.o
+
+.PHONY : config.o
+
+# target to build an object file
+config.cpp.o:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/config.cpp.o
+.PHONY : config.cpp.o
+
+config.i: config.cpp.i
+
+.PHONY : config.i
+
+# target to preprocess a source file
+config.cpp.i:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/config.cpp.i
+.PHONY : config.cpp.i
+
+config.s: config.cpp.s
+
+.PHONY : config.s
+
+# target to generate assembly for a file
+config.cpp.s:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/config.cpp.s
+.PHONY : config.cpp.s
+
 frame.o: frame.cpp.o
 
 .PHONY : frame.o
@@ -179,6 +206,60 @@ frame.cpp.s:
 	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/frame.cpp.s
 .PHONY : frame.cpp.s
 
+map.o: map.cpp.o
+
+.PHONY : map.o
+
+# target to build an object file
+map.cpp.o:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/map.cpp.o
+.PHONY : map.cpp.o
+
+map.i: map.cpp.i
+
+.PHONY : map.i
+
+# target to preprocess a source file
+map.cpp.i:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/map.cpp.i
+.PHONY : map.cpp.i
+
+map.s: map.cpp.s
+
+.PHONY : map.s
+
+# target to generate assembly for a file
+map.cpp.s:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/map.cpp.s
+.PHONY : map.cpp.s
+
+mappoint.o: mappoint.cpp.o
+
+.PHONY : mappoint.o
+
+# target to build an object file
+mappoint.cpp.o:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/mappoint.cpp.o
+.PHONY : mappoint.cpp.o
+
+mappoint.i: mappoint.cpp.i
+
+.PHONY : mappoint.i
+
+# target to preprocess a source file
+mappoint.cpp.i:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/mappoint.cpp.i
+.PHONY : mappoint.cpp.i
+
+mappoint.s: mappoint.cpp.s
+
+.PHONY : mappoint.s
+
+# target to generate assembly for a file
+mappoint.cpp.s:
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build && $(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/mappoint.cpp.s
+.PHONY : mappoint.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -191,9 +272,18 @@ help:
 	@echo "... camera.o"
 	@echo "... camera.i"
 	@echo "... camera.s"
+	@echo "... config.o"
+	@echo "... config.i"
+	@echo "... config.s"
 	@echo "... frame.o"
 	@echo "... frame.i"
 	@echo "... frame.s"
+	@echo "... map.o"
+	@echo "... map.i"
+	@echo "... map.s"
+	@echo "... mappoint.o"
+	@echo "... mappoint.i"
+	@echo "... mappoint.s"
 .PHONY : help
 
 

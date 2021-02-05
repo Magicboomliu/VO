@@ -105,16 +105,94 @@ src/CMakeFiles/simplevo.dir/frame.cpp.o.provides: src/CMakeFiles/simplevo.dir/fr
 src/CMakeFiles/simplevo.dir/frame.cpp.o.provides.build: src/CMakeFiles/simplevo.dir/frame.cpp.o
 
 
+src/CMakeFiles/simplevo.dir/mappoint.cpp.o: src/CMakeFiles/simplevo.dir/flags.make
+src/CMakeFiles/simplevo.dir/mappoint.cpp.o: ../src/mappoint.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/simplevo.dir/mappoint.cpp.o"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simplevo.dir/mappoint.cpp.o -c /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/mappoint.cpp
+
+src/CMakeFiles/simplevo.dir/mappoint.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simplevo.dir/mappoint.cpp.i"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/mappoint.cpp > CMakeFiles/simplevo.dir/mappoint.cpp.i
+
+src/CMakeFiles/simplevo.dir/mappoint.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simplevo.dir/mappoint.cpp.s"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/mappoint.cpp -o CMakeFiles/simplevo.dir/mappoint.cpp.s
+
+src/CMakeFiles/simplevo.dir/mappoint.cpp.o.requires:
+
+.PHONY : src/CMakeFiles/simplevo.dir/mappoint.cpp.o.requires
+
+src/CMakeFiles/simplevo.dir/mappoint.cpp.o.provides: src/CMakeFiles/simplevo.dir/mappoint.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/mappoint.cpp.o.provides.build
+.PHONY : src/CMakeFiles/simplevo.dir/mappoint.cpp.o.provides
+
+src/CMakeFiles/simplevo.dir/mappoint.cpp.o.provides.build: src/CMakeFiles/simplevo.dir/mappoint.cpp.o
+
+
+src/CMakeFiles/simplevo.dir/map.cpp.o: src/CMakeFiles/simplevo.dir/flags.make
+src/CMakeFiles/simplevo.dir/map.cpp.o: ../src/map.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/simplevo.dir/map.cpp.o"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simplevo.dir/map.cpp.o -c /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/map.cpp
+
+src/CMakeFiles/simplevo.dir/map.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simplevo.dir/map.cpp.i"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/map.cpp > CMakeFiles/simplevo.dir/map.cpp.i
+
+src/CMakeFiles/simplevo.dir/map.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simplevo.dir/map.cpp.s"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/map.cpp -o CMakeFiles/simplevo.dir/map.cpp.s
+
+src/CMakeFiles/simplevo.dir/map.cpp.o.requires:
+
+.PHONY : src/CMakeFiles/simplevo.dir/map.cpp.o.requires
+
+src/CMakeFiles/simplevo.dir/map.cpp.o.provides: src/CMakeFiles/simplevo.dir/map.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/map.cpp.o.provides.build
+.PHONY : src/CMakeFiles/simplevo.dir/map.cpp.o.provides
+
+src/CMakeFiles/simplevo.dir/map.cpp.o.provides.build: src/CMakeFiles/simplevo.dir/map.cpp.o
+
+
+src/CMakeFiles/simplevo.dir/config.cpp.o: src/CMakeFiles/simplevo.dir/flags.make
+src/CMakeFiles/simplevo.dir/config.cpp.o: ../src/config.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/simplevo.dir/config.cpp.o"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/simplevo.dir/config.cpp.o -c /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/config.cpp
+
+src/CMakeFiles/simplevo.dir/config.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/simplevo.dir/config.cpp.i"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/config.cpp > CMakeFiles/simplevo.dir/config.cpp.i
+
+src/CMakeFiles/simplevo.dir/config.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/simplevo.dir/config.cpp.s"
+	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/src/config.cpp -o CMakeFiles/simplevo.dir/config.cpp.s
+
+src/CMakeFiles/simplevo.dir/config.cpp.o.requires:
+
+.PHONY : src/CMakeFiles/simplevo.dir/config.cpp.o.requires
+
+src/CMakeFiles/simplevo.dir/config.cpp.o.provides: src/CMakeFiles/simplevo.dir/config.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/config.cpp.o.provides.build
+.PHONY : src/CMakeFiles/simplevo.dir/config.cpp.o.provides
+
+src/CMakeFiles/simplevo.dir/config.cpp.o.provides.build: src/CMakeFiles/simplevo.dir/config.cpp.o
+
+
 # Object files for target simplevo
 simplevo_OBJECTS = \
 "CMakeFiles/simplevo.dir/camera.cpp.o" \
-"CMakeFiles/simplevo.dir/frame.cpp.o"
+"CMakeFiles/simplevo.dir/frame.cpp.o" \
+"CMakeFiles/simplevo.dir/mappoint.cpp.o" \
+"CMakeFiles/simplevo.dir/map.cpp.o" \
+"CMakeFiles/simplevo.dir/config.cpp.o"
 
 # External object files for target simplevo
 simplevo_EXTERNAL_OBJECTS =
 
 ../lib/libsimplevo.so: src/CMakeFiles/simplevo.dir/camera.cpp.o
 ../lib/libsimplevo.so: src/CMakeFiles/simplevo.dir/frame.cpp.o
+../lib/libsimplevo.so: src/CMakeFiles/simplevo.dir/mappoint.cpp.o
+../lib/libsimplevo.so: src/CMakeFiles/simplevo.dir/map.cpp.o
+../lib/libsimplevo.so: src/CMakeFiles/simplevo.dir/config.cpp.o
 ../lib/libsimplevo.so: src/CMakeFiles/simplevo.dir/build.make
 ../lib/libsimplevo.so: /usr/local/lib/libopencv_stitching.so.3.4.0
 ../lib/libsimplevo.so: /usr/local/lib/libopencv_superres.so.3.4.0
@@ -162,7 +240,7 @@ simplevo_EXTERNAL_OBJECTS =
 ../lib/libsimplevo.so: /usr/local/lib/libopencv_imgproc.so.3.4.0
 ../lib/libsimplevo.so: /usr/local/lib/libopencv_core.so.3.4.0
 ../lib/libsimplevo.so: src/CMakeFiles/simplevo.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library ../../lib/libsimplevo.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library ../../lib/libsimplevo.so"
 	cd /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/simplevo.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -172,6 +250,9 @@ src/CMakeFiles/simplevo.dir/build: ../lib/libsimplevo.so
 
 src/CMakeFiles/simplevo.dir/requires: src/CMakeFiles/simplevo.dir/camera.cpp.o.requires
 src/CMakeFiles/simplevo.dir/requires: src/CMakeFiles/simplevo.dir/frame.cpp.o.requires
+src/CMakeFiles/simplevo.dir/requires: src/CMakeFiles/simplevo.dir/mappoint.cpp.o.requires
+src/CMakeFiles/simplevo.dir/requires: src/CMakeFiles/simplevo.dir/map.cpp.o.requires
+src/CMakeFiles/simplevo.dir/requires: src/CMakeFiles/simplevo.dir/config.cpp.o.requires
 
 .PHONY : src/CMakeFiles/simplevo.dir/requires
 

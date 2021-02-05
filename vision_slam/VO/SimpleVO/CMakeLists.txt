@@ -5,9 +5,9 @@ set( CMAKE_CXX_COMPILER "g++" )
 set( CMAKE_BUILD_TYPE "Release" )
 set( CMAKE_CXX_FLAGS "-std=c++11 -march=native -O3" )
 
-list( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules )
-set( EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin )
-set( LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib )
+list( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules )  # Set CMake Path
+set( EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin )  # Set binary file
+set( LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib )    # Set generated libraray
 
 ############### dependencies ######################
 # Eigen
@@ -28,5 +28,5 @@ set( THIRD_PARTY_LIBS
     g2o_core g2o_stuff g2o_types_sba
 )
 ############### source and test ######################
-include_directories( ${PROJECT_SOURCE_DIR}/include )
-add_subdirectory( src )
+include_directories( ${PROJECT_SOURCE_DIR}/include )                  # set Header
+add_subdirectory( src )                                                                                        # set Source cpp
