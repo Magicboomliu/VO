@@ -51,7 +51,16 @@ bool VisualOdometry::addFrame ( Frame::Ptr frame )
         poseEstimationPnP(); // pnp : 3d-2d
         if ( checkEstimatedPose() == true ) // a good estimation
         {
-            curr_->T_c_w_ = T_c_r_estimated_ * ref_->T_c_w_;  // T_c_w = T_c_r*T_r_w 
+            cout<<ref_->T_c_w_.matrix()<<endl;
+            Eigen::MatrixXd culPoseMatrix(4,4);
+            culPoseMatrix = T_c_r_estimated_.matrix() * ref_->T_c_w_.matrix();
+            Eigen::MatrixXd rm(3,3);
+            rm<<culPoseMatrix(0,0),culPoseMatrix(0,1),culPoseMatrix(0,2),
+            culPoseMatrix(1,0),culPoseMatrix(1,1),culPoseMatrix(1,2),
+            culPoseMatrix(2,0), culPoseMatrix(2,1), culPoseMatrix(2,2);
+            Eigen::Vector3d tv(culPoseMatrix(0,3),culPoseMatrix(1,3),culPoseMatrix(2,3));
+            curr_->T_c_w_ = Sophus::SE3d(rm,tv);
+            cout<<"OKsss"<<endl;
             ref_ = curr_;
             setRef3DPoints();
             num_lost_ = 0;
@@ -118,8 +127,8 @@ void VisualOdometry::setRef3DPoints()
     pts_3d_ref_.clear();
     descriptors_ref_ = Mat();
     for ( size_t i=0; i<keypoints_curr_.size(); i++ )
-    {
-        double d = ref_->findDepth(keypoints_curr_[i]);               
+    {  
+        double d = ref_->findDepth(keypoints_curr_[i]);     // FIXME
         if ( d > 0)
         {
             Vector3d p_cam = ref_->camera_->pixel2camera(
@@ -150,22 +159,32 @@ void VisualOdometry::poseEstimationPnP()
         0,0,1
     );
     Mat rvec, tvec, inliers;
-    cv::solvePnPRansac( pts3d, pts2d, K, Mat(), rvec, tvec, false, 100, 4.0, 0.99, inliers );
+    cout<<"Pts3d Size is:  "<<pts3d.size()<<endl;
+    cout<<"Pts2d Size is:  "<<pts2d.size()<<endl;
+    cout<<pts3d[0].x<<"   "<<pts3d[0].y<<"    "<<pts3d[0].z<<endl;
+    cout<<pts2d[0].x<<"  "<<pts2d[0].y<<"  "<<endl;
+    bool result  = cv::solvePnPRansac( pts3d, pts2d, K, Mat(), rvec, tvec, false, 100, 4.0, 0.99, inliers );
     num_inliers_ = inliers.rows;
     cout<<"pnp inliers: "<<num_inliers_<<endl;
+    
     // process the R and the T, rvec is the rotation vector, tvec is the translation vector
      Mat matrix_rotation;
      cv::Rodrigues(rvec,matrix_rotation);  // 3 x 3 rotation matrix
       int row_mat = matrix_rotation.rows;
       int col_mat = matrix_rotation.cols;
      Eigen::MatrixXd R_eigen(row_mat,col_mat);
+
       R_eigen<<matrix_rotation.at<double>(0,0),matrix_rotation.at<double>(0,1),matrix_rotation.at<double>(0,2),
      matrix_rotation.at<double>(1,0),matrix_rotation.at<double>(1,1),matrix_rotation.at<double>(1,2),
      matrix_rotation.at<double>(2,0),matrix_rotation.at<double>(2,1),matrix_rotation.at<double>(2,2);
+
+    cout<<R_eigen.matrix()<<endl;
     T_c_r_estimated_ = Sophus::SE3d(
         R_eigen,
         Vector3d( tvec.at<double>(0,0), tvec.at<double>(1,0), tvec.at<double>(2,0))
     );
+    cout<<T_c_r_estimated_.matrix() <<endl;
+
 }
 
 bool VisualOdometry::checkEstimatedPose()

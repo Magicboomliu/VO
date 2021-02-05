@@ -4,7 +4,10 @@ Frame::Frame(): id_(-1), time_stamp_(-1), camera_(nullptr){
 }
 Frame::Frame ( long id, double time_stamp, Sophus::SE3d T_c_w, Camera::Ptr camera, Mat color, Mat depth )
 : id_(id), time_stamp_(time_stamp), T_c_w_(T_c_w), camera_(camera), color_(color), depth_(depth)
-{}
+{
+
+    
+}
 Frame::~Frame()
 {}
 // 添加一个Frame ， get a id ; extra is null ptr
@@ -21,7 +24,7 @@ double Frame::findDepth ( const cv::KeyPoint& kp )
     ushort d = depth_.ptr<ushort>(y)[x];  // get depth
     if ( d!=0 )   // 如果深度不为 0 ，可以直接使用词典
     {
-        return double(d)/camera_->depth_scale_;  // set  a scaloe
+        return double(d)/camera_->depth_scale_;  // The Depth_Scale is 0:
     }
     else 
     {

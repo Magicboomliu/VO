@@ -82,6 +82,9 @@ pts_2d.push_back(keypoints_2[m.trainIdx].pt);      // keypoint2 :only 2d
 // Solve PNP using OpenCV
 Mat r, t;  // r is rotation vector , t is translation vector
 solvePnP(pts_3d,pts_2d,camera_K,Mat(),r,t, false, cv::SOLVEPNP_EPNP);
+Mat inliners;
+bool result  = solvePnPRansac(pts_3d,pts_2d,camera_K,Mat(),r,t,false,100,4.0,0.99,inliners);
+cout<<result<<endl;
 Mat R;
 cv::Rodrigues(r,R);
 cout<<" Rotation Matrix R (3,3 ): "<<"\n"<<R<<endl;

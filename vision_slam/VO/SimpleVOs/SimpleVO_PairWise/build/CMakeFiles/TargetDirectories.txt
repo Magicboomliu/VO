@@ -3,3 +3,6 @@
 /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/src/CMakeFiles/rebuild_cache.dir
 /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/src/CMakeFiles/simplevo.dir
 /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/src/CMakeFiles/edit_cache.dir
+/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/test/CMakeFiles/rebuild_cache.dir
+/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/test/CMakeFiles/example.dir
+/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/test/CMakeFiles/edit_cache.dir

@@ -30,3 +30,5 @@ set( THIRD_PARTY_LIBS
 ############### source and test ######################
 include_directories( ${PROJECT_SOURCE_DIR}/include )                  # set Header
 add_subdirectory( src )                                                                                        # set Source cpp
+
+add_subdirectory(test)

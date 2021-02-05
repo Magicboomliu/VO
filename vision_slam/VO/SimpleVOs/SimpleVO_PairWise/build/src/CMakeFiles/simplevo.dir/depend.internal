@@ -3,6 +3,7 @@
 
 src/CMakeFiles/simplevo.dir/camera.cpp.o
  ../include/simplevo/camera.h
+ ../include/simplevo/config.h
  ../include/simplevo/default_include.h
  /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/cuda.hpp
  /home/liuzihua/opencv-3.4.0/opencv_contrib-3.4.0/modules/xfeatures2d/include/opencv2/xfeatures2d/nonfree.hpp

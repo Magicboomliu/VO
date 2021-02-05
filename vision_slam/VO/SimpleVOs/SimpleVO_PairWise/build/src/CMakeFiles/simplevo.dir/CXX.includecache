@@ -83,6 +83,8 @@ opencv2/features2d.hpp
 /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/src/camera.cpp
 simplevo/camera.h
 /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/src/simplevo/camera.h
+simplevo/config.h
+/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/src/simplevo/config.h
 
 /home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/src/config.cpp
 simplevo/config.h

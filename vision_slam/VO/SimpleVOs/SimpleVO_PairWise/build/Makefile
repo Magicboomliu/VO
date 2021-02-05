@@ -123,6 +123,19 @@ simplevo/fast:
 	$(MAKE) -f src/CMakeFiles/simplevo.dir/build.make src/CMakeFiles/simplevo.dir/build
 .PHONY : simplevo/fast
 
+#=============================================================================
+# Target rules for targets named example
+
+# Build rule for target.
+example: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 example
+.PHONY : example
+
+# fast build rule for target.
+example/fast:
+	$(MAKE) -f test/CMakeFiles/example.dir/build.make test/CMakeFiles/example.dir/build
+.PHONY : example/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -132,6 +145,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... simplevo"
+	@echo "... example"
 .PHONY : help
 
 

@@ -40,6 +40,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/src/cmake_install.cmake")
+  include("/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVOs/SimpleVO_PairWise/build/test/cmake_install.cmake")
 
 endif()
 

@@ -17,10 +17,16 @@
  *
  */
 #include "simplevo/camera.h"
+#include"simplevo/config.h"
 namespace simplevo
 {
 Camera::Camera()
 {
+    fx_ = Config::get<float>("camera.fx");
+    fy_ = Config::get<float>("camera.fy");
+    cx_ = Config::get<float>("camera.cx");
+    cy_ = Config::get<float>("camera.cy");
+    depth_scale_ = Config::get<float>("camera.depth_scale");
 }
 Vector3d Camera::world2camera ( const Vector3d& p_w, const Sophus::SE3d & T_c_w )
 {
