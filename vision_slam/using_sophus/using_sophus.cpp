@@ -3,6 +3,11 @@
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 #include "sophus/se3.hpp"
+#include<opencv2/core.hpp>
+#include<opencv2/highgui.hpp>
+#include<opencv2/xfeatures2d.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
+#include<opencv2/core/eigen.hpp>
 using namespace std;
 using namespace Eigen;
 
@@ -19,6 +24,17 @@ int main(int argc, char const *argv[])
   cout << "SO(3) from matrix:\n" << SO3_R.matrix() << endl;   // 3 *3 Rotation Matrix
   cout << "SO(3) from quaternion:\n" << SO3_q.matrix() << endl; //3 *3 Rotation Matrix
   cout << "they are equal" << endl;
+  // cv::Mat r = (cv::Mat_<double>(3, 1) << 1, 2, 3);
+  // cv::Mat R_;
+  //   Vector3d t1(1, 0, 0);           // 沿X轴平移1
+  // cv::Rodrigues(r,R_);
+  // int row_mat = R_.rows;
+  // int col_mat = R_.cols;
+  // Eigen::MatrixXd R_eigen(row_mat,col_mat);
+  // cv::cv2eigen(R_,R_eigen);
+  // Sophus::SE3d se3d(R_eigen,t1 );
+  // cout<<se3d.matrix()<<endl; // R is a mat, convert to Eigen for more operations
+
 
   ////////////////////////从李群获取李代数////////////////////////////////
    // 使用对数映射获得它的李代数

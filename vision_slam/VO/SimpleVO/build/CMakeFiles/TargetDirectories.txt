@@ -1,5 +1,0 @@
-/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/CMakeFiles/rebuild_cache.dir
-/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/CMakeFiles/edit_cache.dir
-/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/rebuild_cache.dir
-/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/simplevo.dir
-/home/liuzihua/桌面/zihua/ComputerVision/VO/vision_slam/VO/SimpleVO/build/src/CMakeFiles/edit_cache.dir
