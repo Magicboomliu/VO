@@ -1,6 +1,6 @@
 # Visual Odometry of Computer Vision 视觉里程计设计中的数学部分
-Principile Algorithm of Visual Odometry of Computer Vision   ( Make sure You underStand LaTex )  
-Chrome Latex Extention is required, If Not, Please via:  
+Principle Algorithm of Visual Odometry of Computer Vision   ( Make sure You underStand LaTex )  
+Chrome Latex Extension is required, If Not, Please via:  
 https://blog.csdn.net/magicboom/article/details/113186548  
 
 ****Github Repo: https://github.com/Magicboomliu/VO****  
